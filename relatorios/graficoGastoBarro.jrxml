@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b0ed088-470b-4344-a052-34bd71d864b6">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="gastoAgua" class="java.lang.Double"/>
+	<field name="gastoEletricidade" class="java.lang.Double"/>
+	<field name="gastoFuncionarios" class="java.lang.Double"/>
+	<field name="gastoLenha" class="java.lang.Double"/>
+	<field name="gastoBarro" class="java.lang.Double"/>
+	<field name="gastoOutros" class="java.lang.Double"/>
+	<variable name="somaLenha" class="java.lang.Double" calculation="Count">
+		<variableExpression><![CDATA[$F{gastoLenha}.equals( $F{gastoLenha} )?"SomeNotNull":null]]></variableExpression>
+	</variable>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="8b476707-a380-4c37-8df3-8491971237bb"/>
+				<staticText>
+					<reportElement x="20" y="20" width="275" height="43" forecolor="#FFFFFF" uuid="52775637-2df2-4e1c-a1d4-36a140586bff"/>
+					<textElement>
+						<font size="28" isBold="true"/>
+					</textElement>
+					<text><![CDATA[MsCtrl Produção]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="295" y="53" width="290" height="20" forecolor="#FFFFFF" uuid="9dcc2e2e-168e-4bfe-ad6e-2b658a355ec5"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Gráfico de gastos com barro]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="8f269ec0-12ce-4b61-8e18-9338ecca666a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="dd4652f8-9542-41c4-9ff2-1595f0e50c1e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="43e6531c-2eac-4b11-8a81-d2deb5416577"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="200">
+			<lineChart>
+				<chart>
+					<reportElement x="0" y="15" width="555" height="185" uuid="67734419-fb2a-42c5-aa13-b1b8ededa8ec"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Barro"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{gastoBarro}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{gastoBarro}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>
